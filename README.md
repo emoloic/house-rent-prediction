@@ -103,7 +103,7 @@ To deploy this app, we used **Streamlit Cloud.** You can click [here](https://do
 When you will deploy your app, you need to provide the location of your app (python inside) from your github account. Since we'll use MongoDB, you also need to add their outbound IP addresses in your MongoDB server. Click [here](https://docs.streamlit.io/streamlit-cloud/get-started/deploy-an-app/connect-to-data-sources/stable-outbound-ip-addresses) to see their current six stable outbound IP addresses.
 We will cover how to set up the database in the **Prequisites** section.
 
-Click [Here](https://emoloic-house-rent-prediction-web-appweb-app-ovscpn.streamlitapp.com/) to see how the app looks. (Maybe you won't be able to make predictions because the server is not running when you are reviewing the code.)
+Click [Here](https://emoloic-house-rent-prediction-web-appweb-app-2qe9o4.streamlitapp.com/) to see how the app looks. (Maybe you won't be able to make predictions because the server is not running when you are reviewing the code.)
 
 ## Real-time Monitoring
 
