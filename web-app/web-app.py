@@ -1,7 +1,6 @@
 import os
 import time
 import requests
-from PIL import Image
 from pymongo import MongoClient
 import streamlit as st
 
@@ -24,8 +23,7 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-image = Image.open("images/image.jpg")
-st.image(image, width=700)
+st.image("images/image.jpg", width=700)
 
 st.markdown(
     "<h4 style='text-align: center; color: blue;'>Predict the rent of your future house in India !!!</h4>",
