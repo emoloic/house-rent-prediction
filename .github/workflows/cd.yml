@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Updated MLOps pipeline deployment
-        uses: appleboy/ssh-action@master
+        uses: appleboy/ssh-action@v0.1.4
         with:
           host: ${{ env.DEPLOY_HOST }}
           username: ${{ env.DEPLOY_USERNAME }}
