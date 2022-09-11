@@ -19,7 +19,7 @@ The dataset used to feed the MLOps pipeline has been downloaded from [Kaggle](ht
 | --- | --- |
 |BHK | Number of Bedrooms, Hall, Kitchen.|
 |Rent | Rent of the Houses/Apartments/Flats.|
-|Size | Size of the Houses/Apartments/Flats in Square Feet.|
+|Size | Size of the Houses/Apartments/Flats in Square Feet. |
 |Floor | Houses/Apartments/Flats situated in which Floor and Total Number of Floors (Example: Ground out of 2, 3 out of 5, etc.)|
 |Area Type | Size of the Houses/Apartments/Flats calculated on either Super Area or Carpet Area or Build Area.|
 |Area Locality | Locality of the Houses/Apartments/Flats.|
