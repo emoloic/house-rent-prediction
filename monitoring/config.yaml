@@ -1,0 +1,27 @@
+datasets:
+  house-rent-prediction:
+    column_mapping:
+      categorical_features:
+        - 'Area Type'
+        - 'Area Locality'
+        - 'City'
+        - 'Furnishing Status'
+        - 'Tenant Preferred'
+      numerical_features:
+        - 'BHK'
+        - 'Size'
+        - 'Bathroom'
+      target: 'Rent'
+    data_format:
+      header: true
+      separator: ','
+    monitors:
+      - data_drift
+      - num_target_drift
+service:
+  calculation_period_sec: 2
+  min_reference_size: 30
+  moving_reference: false
+  datasets_path: data
+  use_reference: true
+  window_size: 50
