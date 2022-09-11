@@ -1,5 +1,4 @@
 requests
 streamlit
-python
 pymongo
 PIL
