@@ -23,7 +23,7 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-st.image("images/image.jpg", width=700)
+st.image("./images/image.jpg", width=700)
 
 st.markdown(
     "<h4 style='text-align: center; color: blue;'>Predict the rent of your future house in India !!!</h4>",
