@@ -99,17 +99,17 @@ To build our frontend app, we used [streamlit](https://streamlit.io/cloud). Stre
 2. Users fill the form with the desired characteristics of the house.
 3. Then, they click on the Predict Button to make a prediction. 
 
-To deploy this app, we used **Streamlit Cloud.** You can click [here](https://docs.streamlit.io/streamlit-cloud/get-started/deploy-an-app) to see how to deploy an app with streamlit Cloud. Basically your are required to provide all the dependencies needed to run your app in a **requirements.txt** file, and also provide all the environment variables.
-When you will deploy your app, you need to provide the location of your app (python inside) from your github account. Since we'll use MongoDB, you also need to add their outbound IP addresses in your MongoDB server. Click [here](https://docs.streamlit.io/streamlit-cloud/get-started/deploy-an-app/connect-to-data-sources/stable-outbound-ip-addresses) to see their current six stable outbound IP addresses.
+To deploy this app, we used **Streamlit Cloud.** You can click [here](https://docs.streamlit.io/streamlit-cloud/get-started/deploy-an-app) to see how to deploy an app with streamlit Cloud. Basically your are required to provide all the dependencies needed to run your app in a **requirements.txt** file, and also provide all the environment variables during the deployment in Streamlit Cloud.
+When you will deploy your app, you need to provide the location of your app (ie the python file inside your web-app folder, but streamlit is smart enough to know where your streamlit app is located in the repository). Since we'll use MongoDB database, you also need to add their outbound IP addresses in your MongoDB server. Click [here](https://docs.streamlit.io/streamlit-cloud/get-started/deploy-an-app/connect-to-data-sources/stable-outbound-ip-addresses) to see their current six stable outbound IP addresses.
 We will cover how to set up the database in the **Prequisites** section.
 
-Click [Here](https://emoloic-house-rent-prediction-web-appweb-app-2qe9o4.streamlitapp.com/) to see how the app looks. (Maybe you won't be able to make predictions because the server is not running when you are reviewing the code.)
+Click [Here](https://emoloic-house-rent-prediction-web-appweb-app-2qe9o4.streamlitapp.com/) to see how the app looks. (Maybe you won't be able to make predictions because the server is not running at the moment you are reviewing the code.)
 
 ## Real-time Monitoring
 
 As you can see in the pipeline diagram, we chose **Evidently AI** to monitor the pipeline. The code of this step is [here](monitoring/app.py). What does the code do ?
 
-1. Get reference file (the location) from Mlflow (the location of the reference file is logged as a parameter in Mlflow). We did that because our production model is deployed automatically and the only way the get the location of the file used to train the model is to log it as a parameter in Mlflow. Normally we can configure the reference file in the [config.yml](monitoring/config.yaml) file of Evidently. Two datasets are needed to compare reference data and the current data.
+1. Get reference file (the location) from Mlflow (the location of the reference file is logged as a parameter in Mlflow). We did that because our production model is deployed automatically and the only way to get the location of the file used to train the model is to log it as a parameter in Mlflow. Normally we can configure the reference file in the [config.yml](monitoring/config.yaml) file of Evidently. Two datasets are needed to compare reference data and the current data.
 2. Get predictions from our current data from our Prediction Service. To do that, we need to configure how Evidently will calculate the metrics inside the [config.yml](monitoring/config.yml) file. (In our case, we are monitoring **Data Drift** and **Numerical Target Drift**).
 3. The Evidently Service then exposes a Prometheus endpoint (Prometheus checks new metrics from time to time and log them to the database).
 4. Prometheus is then used as a data source to Grafana (The visualization and alerting functionality).
@@ -148,7 +148,7 @@ You can easily deployed the entire app via the following steps:
 
     then, logout and log back in so that the group membership is re-evaluated.
 	
-	We also need to log in to [Docker Hub](https://hub.docker.com/) and use the free private repository offered so that our docker images will keep private. (You can use another Image repository such as ECR, GCR), but you will need to make some changes in the code.
+	You also need to log in to [Docker Hub](https://hub.docker.com/) and use the free private repository offered so that the docker images will keep private. (You can use another Image repository such as ECR, GCR), but you will need to make some changes in the code.
 	We called this repository **house-rent-prediction.** This repository will content all our docker images.
 	
 	Now we need to log in to Docker Hub from our VM in other to pull the images. To do that, you need to run the following command:
@@ -159,7 +159,7 @@ You can easily deployed the entire app via the following steps:
 	
 	In this step, you need to provide your Docker Hub username and password. Once, you've done all the previous steps, you can move to the next step.
 	
-	Now, you need to create an **AWS account** if you don't have yet and use the free tier to create a PostgreSQL Database. (As mentioned above, this database is used to store our Mflow experiment data). You will also need to create a user and attach a policy that allows the user to perform all the actions on S3 bucket. (Don't forget to make accessible your database from anywhere in other to perform CI/CD)
+	Now, you need to create an **AWS account** if you don't have yet and use the free tier to create a PostgreSQL Database. (As mentioned above, this database is used to store our Mflow experiment data). You will also need to create a user and attach a policy that allows the user to perform all the actions on S3 bucket. (Don't forget to make accessible your database from your VM).
 	
 	You will also need to create a MongoDB database from [mongoDB Atlas](https://www.mongodb.com/) and add your VM's IP address to connect to the database. You can use the free cluster offered but ideally, it's not recommended to use this type of cluster in production. It's just for experimentation.
 	
@@ -170,7 +170,7 @@ You can easily deployed the entire app via the following steps:
 	
 	If you want to clearly understand how it works, you need to read the [docker-compose](./docker-compose.yml) file and the [Makefile](./Makefile).
 	
-	NB: For **integration tests**, you need the named your environment variables differently from your production environment variables. You can the prefix **test-**. Don't forget to set your kaggle and Docker Hub credentials as well.
+	NB: For **integration tests**, you need the named your environment variables differently from your production environment variables. You can use the prefix **test-**. Don't forget to set your kaggle and Docker Hub credentials as well.
 	
 3. [*Optional*] Configure the development evironment:
 
@@ -210,7 +210,7 @@ You can easily deployed the entire app via the following steps:
 	$ make deployment
 	```
 
-	The training workflow will be then automatically executed the fist day of every month. It will download the latest dataset (if the Kaggle credentials have been provided), search the best model in terms of rmse metric among XGBoost, Random Forest and finally will store it in the model registry. It is worth noting the training workflow can also be immediately executed without waiting the next schedule:
+	The training workflow will be then automatically executed the fist day of every month. It will download the latest dataset (if the Kaggle credentials have been provided), search the best model in terms of rmse metric among XGBoost, Random Forest and finally will store it in the model registry. It is worth noting the training workflow can also be immediately executed without waiting the next schedule. All your flow runs can be visualize in your prefect Cloud account.
 
 	```
 	$ make train
@@ -242,4 +242,3 @@ You can easily deployed the entire app via the following steps:
 
 - **Continuous Integration**: On every push and pull request on `main` and `dev` branches, the Docker images are built, tested and then pushed to DockerHub.
 - **Continuous Deployment**: On every push and pull request on `main` branch, only if the Continuous Integration workflow has been successful successful, the updated pipeline is deployed to the target server and run.
-
