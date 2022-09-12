@@ -166,7 +166,7 @@ You can easily deployed the entire app via the following steps:
 	Next, you will create a [prefect cloud](https://docs.prefect.io/ui/cloud-getting-started/) account, create a workspace (eg: house-rent-prediction). Then, you need to go to your profile and create an API Key to access Prefect Cloud from Docker container. For more informations on how to manually configure Cloud settings and run a flow with Prefect Cloud, you can click [here](https://docs.prefect.io/ui/cloud-getting-started/).	
 	In other, to run our flow with Prefect Cloud, we need to provide the **PREFECT_API_URL** and **PREFECT_API_KEY** as environment variables.
 	
-	Once you've done all these steps, keep in mind that you are required to set all the [environment variables](./.env-vars) in order to start all the services inside the docker-compose.yml file (click [here](./docker-compose.yml) to see all the environment variables).
+	Once you've done all these steps, keep in mind that you are required to set all the [environment variables](./.env-vars) in order to start all the services inside the docker-compose.yml file (click [here](./docker-compose.yml) to see all the environment variables). You can set all those environment variables in a .env file in the directory (app) or export those variables from your terminal.
 	
 	If you want to clearly understand how it works, you need to read the [docker-compose](./docker-compose.yml) file and the [Makefile](./Makefile).
 	

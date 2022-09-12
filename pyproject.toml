@@ -22,7 +22,7 @@ ignore-docstrings = "yes"
 ignore-imports = "yes"
 
 [tool.black]
-line-length = 88
+line-length = 120
 target-version = ['py39']
 skip-string-normalization = true
 

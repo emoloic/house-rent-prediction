@@ -21,8 +21,6 @@ import flask
 import pandas as pd
 import prometheus_client
 from flask import Flask
-from evidently.dashboard import Dashboard
-from evidently.dashboard.tabs import DataDriftTab, CatTargetDriftTab
 from evidently.model_monitoring import (
     ModelMonitoring,
     DataDriftMonitor,
@@ -39,8 +37,6 @@ from evidently.pipeline.column_mapping import ColumnMapping
 TRACKING_SERVER_HOST = os.getenv("TRACKING_SERVER_HOST", "localhost")
 TRACKING_SERVER_PORT = os.getenv("TRACKING_SERVER_PORT", "5000")
 EXPERIMENT_NAME = os.getenv("EXPERIMENT_NAME", "house-price-prediction")
-
-mongo_client = MongoClient(MONGODB_URI)
 
 app = Flask(__name__)
 
